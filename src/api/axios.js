@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://inventory-dashboard-backend-4uwy.onrender.com/api',
 });
 
 // Automatically attach token to every request

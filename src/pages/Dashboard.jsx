@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   const fetchProducts = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get("http://localhost:5000/api/products", {
+    const res = await axios.get("https://inventory-dashboard-backend-4uwy.onrender.com/api/products", {
       headers: { Authorization: `Bearer ${token}` }
     });
     setProducts(res.data);
