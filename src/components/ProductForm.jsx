@@ -26,23 +26,39 @@ const ProductForm = ({ product, setShowForm, fetchProducts }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-      <form className="bg-white p-4 rounded w-96" onSubmit={handleSubmit}>
-        <h2 className="text-lg font-bold mb-3">{product ? "Edit Product" : "Add Product"}</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 sm:p-6 z-50">
+      <form
+        className="bg-white w-full max-w-lg p-8 sm:p-10 rounded-2xl shadow-md space-y-6"
+        onSubmit={handleSubmit}
+      >
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800">
+          {product ? "Edit Product" : "Add Product"}
+        </h2>
         {["name", "quantity", "price", "category"].map((field) => (
           <input
             key={field}
             name={field}
-            placeholder={field}
+            placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
             value={form[field]}
             onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-            className="w-full mb-2 p-2 border rounded"
+            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         ))}
-        <div className="flex justify-end gap-2">
-          <button type="button" onClick={() => setShowForm(false)} className="px-3 py-1 bg-gray-500 text-white rounded">Cancel</button>
-          <button className="px-3 py-1 bg-blue-600 text-white rounded">{product ? "Update" : "Add"}</button>
+        <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-4">
+          <button
+            type="button"
+            onClick={() => setShowForm(false)}
+            className="w-full sm:w-auto bg-gray-500 hover:bg-gray-600 text-white px-4 py-3 sm:px-6 sm:py-3 rounded-lg font-semibold transition-colors duration-200"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 sm:px-6 sm:py-3 rounded-lg font-semibold transition-colors duration-200"
+          >
+            {product ? "Update" : "Add"}
+          </button>
         </div>
       </form>
     </div>

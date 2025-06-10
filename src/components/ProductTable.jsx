@@ -12,26 +12,38 @@ const ProductTable = ({ products, setEditingProduct, setShowForm, fetchProducts 
   };
 
   return (
-    <table className="w-full border shadow-sm">
-      <thead className="bg-gray-100">
+    <table className="w-full min-w-[600px] bg-white rounded-lg shadow-md text-sm sm:text-base">
+      <thead className="bg-gray-50">
         <tr>
-          <th className="p-2 border">Name</th>
-          <th className="p-2 border">Qty</th>
-          <th className="p-2 border">Price</th>
-          <th className="p-2 border">Category</th>
-          <th className="p-2 border">Actions</th>
+          <th className="px-4 py-3 sm:px-6 sm:py-4 text-left font-semibold text-gray-700">Name</th>
+          <th className="px-4 py-3 sm:px-6 sm:py-4 text-left font-semibold text-gray-700">Qty</th>
+          <th className="px-4 py-3 sm:px-6 sm:py-4 text-left font-semibold text-gray-700">Price</th>
+          <th className="px-4 py-3 sm:px-6 sm:py-4 text-left font-semibold text-gray-700 hidden sm:table-cell">Category</th>
+          <th className="px-4 py-3 sm:px-6 sm:py-4 text-left font-semibold text-gray-700">Actions</th>
         </tr>
       </thead>
       <tbody>
         {products.map((prod) => (
-          <tr key={prod._id}>
-            <td className="p-2 border">{prod.name}</td>
-            <td className="p-2 border">{prod.quantity}</td>
-            <td className="p-2 border">{prod.price}</td>
-            <td className="p-2 border">{prod.category}</td>
-            <td className="p-2 border">
-              <button onClick={() => { setEditingProduct(prod); setShowForm(true); }} className="text-blue-600 mr-2">Edit</button>
-              <button onClick={() => handleDelete(prod._id)} className="text-red-600">Delete</button>
+          <tr key={prod._id} className="border-t border-gray-200 hover:bg-gray-50">
+            <td className="px-4 py-3 sm:px-6 sm:py-4">{prod.name}</td>
+            <td className="px-4 py-3 sm:px-6 sm:py-4">{prod.quantity}</td>
+            <td className="px-4 py-3 sm:px-6 sm:py-4">{prod.price}</td>
+            <td className="px-4 py-3 sm:px-6 sm:py-4 hidden sm:table-cell">{prod.category}</td>
+            <td className="px-4 py-3 sm:px-6 sm:py-4">
+              <div className="flex gap-2">
+                <button
+                  onClick={() => { setEditingProduct(prod); setShowForm(true); }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-md font-semibold transition-colors duration-200"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(prod._id)}
+                  className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 sm:px-4 sm:py-2 rounded-md font-semibold transition-colors duration-200"
+                >
+                  Delete
+                </button>
+              </div>
             </td>
           </tr>
         ))}

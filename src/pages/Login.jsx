@@ -30,14 +30,52 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <form className="bg-white p-6 rounded shadow-md w-full max-w-sm" onSubmit={handleLogin}>
-        <h2 className="text-2xl mb-4 font-bold">Login</h2>
-        <input type="email" name="email" placeholder="Email" required className="w-full mb-3 p-2 border rounded" onChange={(e) => setForm({ ...form, email: e.target.value })} />
-        <input type="password" name="password" placeholder="Password" required className="w-full mb-3 p-2 border rounded" onChange={(e) => setForm({ ...form, password: e.target.value })} />
-        <button className="w-full bg-blue-600 text-white p-2 rounded mb-2">Login</button>
-        <button type="button" onClick={handleGoogleLogin} className="w-full bg-red-500 text-white p-2 rounded mb-3">Login with Google</button>
-        <p className="text-sm">Don’t have an account? <Link to="/signup" className="text-blue-500">Signup</Link></p>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8">
+      <form
+        className="bg-white w-full max-w-md p-6 sm:p-8 rounded-2xl shadow-md space-y-4"
+        onSubmit={handleLogin}
+      >
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800">Login</h2>
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
+        />
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-semibold transition-colors duration-200"
+        >
+          Login
+        </button>
+
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          className="w-full bg-red-500 hover:bg-red-600 text-white p-3 rounded-lg font-semibold transition-colors duration-200"
+        >
+          Login with Google
+        </button>
+
+        <p className="text-center text-sm text-gray-600">
+          Don’t have an account?{' '}
+          <Link to="/signup" className="text-blue-500 hover:underline">
+            Signup
+          </Link>
+        </p>
       </form>
     </div>
   );
