@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
-import ProductForm from '../components/ProductForm';
-import ProductTable from '../components/ProductTable';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import ProductForm from "../components/ProductForm";
+import ProductTable from "../components/ProductTable";
+import axios from "axios";
 
 const Dashboard = () => {
   const [products, setProducts] = useState([]);
@@ -11,9 +11,13 @@ const Dashboard = () => {
 
   const fetchProducts = async () => {
     const token = localStorage.getItem("token");
-    const res = await axios.get("https://inventory-dashboard-backend-4uwy.onrender.com/api/products", {
-      headers: { Authorization: `Bearer ${token}` }
-    });
+    const res = await axios.get(
+      "https://inventory-dashboard-backend-4uwy.onrender.com/api/products",
+      // "http://localhost:5000/api/products",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     setProducts(res.data);
   };
 
@@ -26,9 +30,14 @@ const Dashboard = () => {
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8 space-y-4 sm:space-y-0">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Inventory</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
+            Inventory
+          </h2>
           <button
-            onClick={() => { setEditingProduct(null); setShowForm(true); }}
+            onClick={() => {
+              setEditingProduct(null);
+              setShowForm(true);
+            }}
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 sm:px-6 sm:py-3 rounded-lg font-semibold transition-colors duration-200 w-full sm:w-auto"
           >
             + Add Product

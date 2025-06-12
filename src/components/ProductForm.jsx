@@ -14,9 +14,17 @@ const ProductForm = ({ product, setShowForm, fetchProducts }) => {
     const config = { headers: { Authorization: `Bearer ${token}` } };
     try {
       if (product) {
-        await axios.put(`https://inventory-dashboard-backend-4uwy.onrender.com/api/products/${product._id}`, form, config);
+        await axios.put
+        (
+          `https://inventory-dashboard-backend-4uwy.onrender.com/api/products/${product._id}`,
+          // `http://localhost:5000/api/products/${product._id}`,
+           form, config);
       } else {
-        await axios.post("https://inventory-dashboard-backend-4uwy.onrender.com/api/products", form, config);
+        await axios.post
+        (
+           "https://inventory-dashboard-backend-4uwy.onrender.com/api/products", 
+          // "http://localhost:5000/api/products", 
+          form, config);
       }
       fetchProducts();
       setShowForm(false);

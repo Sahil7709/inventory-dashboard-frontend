@@ -5,7 +5,10 @@ const ProductTable = ({ products, setEditingProduct, setShowForm, fetchProducts 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure?")) return;
     const token = localStorage.getItem("token");
-    await axios.delete(`https://inventory-dashboard-backend-4uwy.onrender.com/api/products/${id}`, {
+    await axios.delete(
+      `https://inventory-dashboard-backend-4uwy.onrender.com/api/products/${id}`, 
+      // `http://localhost:5000/api/products/${id}`, 
+      {
       headers: { Authorization: `Bearer ${token}` }
     });
     fetchProducts();

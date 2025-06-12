@@ -9,7 +9,11 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://inventory-dashboard-backend-4uwy.onrender.com/api/auth/register", form);
+      await axios.post
+      (
+        "https://inventory-dashboard-backend-4uwy.onrender.com/api/auth/register", 
+        // "http://localhost:5000/api/auth/register", 
+        form);
       alert("Signup successful!");
       navigate("/");   
     } catch (err) {

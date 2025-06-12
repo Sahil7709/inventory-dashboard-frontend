@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '../firebase/firebase';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebase/firebase";
+import axios from "axios";
 
 const Login = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://inventory-dashboard-backend-4uwy.onrender.com/api/auth/login", form);
+      const res = await axios.post(
+        "https://inventory-dashboard-backend-4uwy.onrender.com/api/auth/login",
+        // "http://localhost:5000/api/auth/login",
+        form
+      );
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {
@@ -22,10 +26,24 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      localStorage.setItem("googleUser", JSON.stringify(result.user));
+
+      const idToken = await result.user.getIdToken();
+
+      const res = await axios.post(
+        "https://inventory-dashboard-backend-4uwy.onrender.com/api/auth/google-login",
+        {
+          idToken,
+        }
+      );
+
+      localStorage.setItem("token", res.data.token);
+
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
       navigate("/dashboard");
     } catch (error) {
-      console.log(error);
+      console.error("Google login error:", error);
+      alert("Google Login Failed");
     }
   };
 
@@ -35,7 +53,9 @@ const Login = () => {
         className="bg-white w-full max-w-md p-6 sm:p-8 rounded-2xl shadow-md space-y-4"
         onSubmit={handleLogin}
       >
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800">Login</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800">
+          Login
+        </h2>
 
         <input
           type="email"
@@ -71,7 +91,7 @@ const Login = () => {
         </button>
 
         <p className="text-center text-sm text-gray-600">
-          Don’t have an account?{' '}
+          Don’t have an account?{" "}
           <Link to="/signup" className="text-blue-500 hover:underline">
             Signup
           </Link>
